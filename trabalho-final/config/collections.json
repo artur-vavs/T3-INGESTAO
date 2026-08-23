@@ -1,0 +1,11 @@
+{
+  "database": "sample_mflix",
+  "collections": [
+    {
+      "collection": "movies",
+      "modo_carga": "full",
+      "campo_watermark": "lastupdated",
+      "destino": "bronze.movies"
+    }
+  ]
+}
