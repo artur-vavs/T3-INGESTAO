@@ -1,0 +1,32 @@
+database: sample_mflix
+
+collections:
+  - collection: movies
+    modo_carga: full
+    campo_watermark: lastupdated
+    destino: bronze.movies
+
+#  - collection: comments
+#    modo_carga: full
+#    campo_watermark: date
+#    destino: bronze.comments
+#
+#  - collection: users
+#    modo_carga: full
+#    campo_watermark: null
+#    destino: bronze.users
+#
+#  - collection: theaters
+#    modo_carga: full
+#    campo_watermark: null
+#    destino: bronze.theaters
+#
+#  - collection: sessions
+#    modo_carga: full
+#    campo_watermark: null
+#    destino: bronze.sessions
+#
+#  - collection: embedded_movies
+#    modo_carga: full
+#    campo_watermark: null
+#    destino: bronze.embedded_movies
