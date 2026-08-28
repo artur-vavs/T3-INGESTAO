@@ -1,0 +1,39 @@
+catalog: mongo_db
+schema: bronze
+database: sample_mflix
+landing_base_path: /Volumes/mongo_db/bronze/landing/sample_mflix
+control_table: mongo_db.bronze.control_ingestion_log
+reconciliation_threshold_pct: 1.0
+
+collections:
+  - collection: users
+    modo_carga: full
+    chave: _id
+
+  - collection: theaters
+    modo_carga: full
+    chave: _id
+
+  - collection: sessions
+    modo_carga: full
+    chave: _id
+
+  - collection: movies
+    modo_carga: incremental
+    campo_watermark: lastupdated
+    chave: _id
+    campos: ["_id", "title", "year", "genres", "cast", "imdb", "tomatoes", "lastupdated"]
+    batch_size: 2000
+
+  - collection: comments
+    modo_carga: incremental
+    campo_watermark: date
+    chave: _id
+    campos: ["_id", "name", "email", "movie_id", "text", "date"]
+    batch_size: 5000
+
+  - collection: embedded_movies
+    modo_carga: full
+    chave: _id
+    campos: ["_id", "title", "year", "plot", "genres", "plot_embedding"]
+    batch_size: 200

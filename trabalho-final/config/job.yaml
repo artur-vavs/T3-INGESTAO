@@ -1,0 +1,28 @@
+resources:
+  jobs:
+    JOB_SAMPLE_MFLIX:
+      name: "JOB: SAMPLE-MFLIX"
+      schedule:
+        quartz_cron_expression: 57 0 9 * * ?
+        timezone_id: UTC
+        pause_status: UNPAUSED
+      tasks:
+        - task_key: run_ingestion
+          notebook_task:
+            notebook_path: /Workspace/Users/arturavs1996@gmail.com/Unifor_T3/T3-INGESTAO/trabalho-final/notebooks/run_ingestion
+            source: WORKSPACE
+          max_retries: 2
+          min_retry_interval_millis: 600000
+          disable_auto_optimization: false
+        - task_key: run_conciliation
+          depends_on:
+            - task_key: run_ingestion
+          notebook_task:
+            notebook_path: /Workspace/Users/arturavs1996@gmail.com/Unifor_T3/T3-INGESTAO/trabalho-final/notebooks/run_reconciliation
+            source: WORKSPACE
+          max_retries: 2
+          min_retry_interval_millis: 600000
+          disable_auto_optimization: false
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
